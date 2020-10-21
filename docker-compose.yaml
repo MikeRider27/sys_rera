@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  web1:
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile-php
+    container_name: php73sys
+    env_file:
+      - web-variables.env
+    restart: always
+    volumes:
+      - ./php:/var/www/html/
+    ports:
+      - 8084:80
+    networks:
+      - app
+      - db
+
+networks:
+  app:
+    driver: bridge
+  db:
+    driver: bridge
